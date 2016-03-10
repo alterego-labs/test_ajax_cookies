@@ -1,0 +1,38 @@
+<h1>Hello</h1>
+
+<%= link_to 'Set value', '#', class: 'set-value-btn' %>
+<%= link_to 'Clear value', '#', class: 'clear-value-btn' %>
+
+<p>Your value is:</p>
+<br/>
+<%= cookies[:your_value] %>
+
+<script type="text/javascript" charset="utf-8">
+$('.set-value-btn').click(function(){
+  $.ajax({
+      url: '/set_value',
+      type: 'POST',
+      dataType: 'json',
+      xhrFields: {
+        withCredentials: true
+      }
+  }).done(function() {
+    window.location.reload();
+  });
+  return false;
+});
+
+$('.clear-value-btn').click(function(){
+  $.ajax({
+      url: '/clear_value',
+      type: 'POST',
+      dataType: 'json',
+      xhrFields: {
+        withCredentials: true
+      }
+  }).done(function() {
+    window.location.reload();
+  });
+  return false;
+});
+</script>
